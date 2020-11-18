@@ -1,0 +1,42 @@
+.MuiPaper-rounded {
+  border-radius: 0px !important;
+  border: 0.4px black solid;
+}
+
+.number {
+  background-color: #F5F5F5 !important;
+}
+
+.operator {
+  background-color: #E5E5E5 !important;
+}
+
+.delete {
+  background-color: #f9a34a !important;
+}
+
+.equals {
+    background-color: #6dade4 !important;
+}
+
+.number-top {
+  height: 35px !important;
+  font-family: monospace;
+  font-size: xx-large;
+  font-weight: bold;
+  align-items: flex-end;
+  color: #6f97f3 !important;
+  border-bottom-width: 0px;
+  background-color: black !important;
+}
+
+.number-bottom {
+  height: 50px !important;
+  font-family: monospace;
+  font-size: xxx-large;
+  font-weight: bold;
+  align-items: flex-end;
+  color: #e03737 !important;
+  border-top-width: 0px;
+  background-color: black !important;
+}

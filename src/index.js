@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from '../src/containers/App';
 import reportWebVitals from './reportWebVitals';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CssBaseline />
+    <Container fixed>
+      <App />
+    </Container>
   </React.StrictMode>,
   document.getElementById('root')
 );
