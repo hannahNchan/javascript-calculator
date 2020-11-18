@@ -21,6 +21,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     height: '200px',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    fontSize: 'xxx-large',
+    paddingTop: '58px',
+    '&:hover': {
+      color: '#929292',
+      borderColor: 'white',
+    },
   },
   number: {
     height: '100px',
@@ -28,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     textAlign: 'center',
+    fontSize: 'xx-large',
+    '&:hover': {
+      color: '#929292',
+      borderColor: 'white',
+    },
   },
   heightEquals: {
     height: '200px',
@@ -37,28 +50,51 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const [operand, setOperand] = useState('');
   const [operator, setOperator] = useState(null);
+  const [result, setResult] = useState('');
+  const [secondDisplay, setSecondDisplay] = useState('0');
   const classes = useStyles();
 
   const prevFirstState = operand;
 
+  const resetAll = () => {
+    setOperand('');
+    setOperator(null);
+    setResult('');
+    setSecondDisplay('');
+  };
+
   const handleClick = e => {
     e.preventDefault();
     setOperand(prevFirstState + e.target.innerText)
+    setSecondDisplay(e.target.innerText);
   };
 
   const handleOperator = e => {
     e.preventDefault();
+    setSecondDisplay('');
     setOperator(e.target.innerText);
     const arrayTemp = prevFirstState.split('');
     const getLast = arrayTemp[arrayTemp.length - 1];
     if (!['-','+','*','/'].includes(getLast)) {
       setOperand(prevFirstState + e.target.innerText);
       setOperator(null);
+      setSecondDisplay('');
+      setSecondDisplay(e.target.innerText);
     }
   };
 
   const handleResult = () => {
-    
+    const arrayTemp = prevFirstState.split('');
+    const getLast = arrayTemp[arrayTemp.length - 1];
+    if (!['-','+','*','/'].includes(getLast)) {
+      const getResult = eval(operand);
+      setResult(getResult);
+      setOperand(prevFirstState + '=' + getResult);
+    };
+  };
+
+  const handleDelete = () => {
+    resetAll();
   };
 
   return (
@@ -69,13 +105,13 @@ const App = () => {
             <Paper className={classes.number+ ' number-top'} id="display">{operand}</Paper>
           </Grid>
           <Grid item xs>
-            <Paper className={classes.number+ ' number-bottom'} id="display">{operand}</Paper>
+            <Paper className={classes.number+ ' number-bottom'} id="display">{secondDisplay}</Paper>
           </Grid>
         </Grid>
       </Grid>
       <Grid container>
         <Grid item xs={6}>
-          <Paper className={classes.number+ ' delete'} id="clear">AC</Paper>
+          <Paper onClick={() => handleDelete()} className={classes.number+ ' delete'} id="clear">AC</Paper>
         </Grid>
         <Grid item xs={3}>
           <Paper onClick={(e) => handleOperator(e)} className={classes.number+ ' operator'} id="divide">/</Paper>
